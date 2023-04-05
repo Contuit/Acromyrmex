@@ -1,0 +1,13 @@
+.control-label {
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  max-width: 100%;
+}
+
+.label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
