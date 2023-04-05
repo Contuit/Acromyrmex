@@ -3,7 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
 import HoverHelp from '../HoverHelp';
-import { FormGroup, ControlLabel, HelpBlock, Col, InputGroup } from '../../utility/UiComponents';
+import {
+  FormGroup,
+  ControlLabel,
+  HelpBlock,
+  Col,
+  Row,
+  InputGroup
+} from '../../utility/UiComponents';
+import './style.css';
 
 const FIELD_EVENT_HANDLER = /^(?:on|handle)[A-Z]/;
 
@@ -112,7 +120,7 @@ class FormField extends React.Component {
     }
 
     const controlLabel = (
-      <ControlLabel>
+      <ControlLabel className="control-label label">
         {prefix} {label}
         {'  '}
         {help && <HoverHelp help={help} />}
@@ -130,17 +138,19 @@ class FormField extends React.Component {
 
     return (
       <FormGroup className="clearfix" validationState={validation}>
-        {!noLabel && (
-          <Col xs={maxCols} sm={offset}>
-            {controlLabel}
+        <Row>
+          {!noLabel && (
+            <Col xs={maxCols} sm={offset}>
+              {controlLabel}
+            </Col>
+          )}
+          <Col xs={maxCols} sm={width}>
+            {input}
           </Col>
-        )}
-        <Col xs={maxCols} sm={width}>
-          {input}
-        </Col>
-        <Col xs={maxCols} sm={width} smOffset={offset}>
-          {error && <HelpBlock>{error}</HelpBlock>}
-        </Col>
+          <Col xs={maxCols} sm={width} smOffset={offset}>
+            {error && <HelpBlock>{error}</HelpBlock>}
+          </Col>
+        </Row>
       </FormGroup>
     );
   }
