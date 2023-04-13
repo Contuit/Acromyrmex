@@ -14,15 +14,6 @@ import {
 import FormField from '../FormField';
 
 class CheckboxInput extends React.Component {
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
-    const { input } = this.props;
-
-    if (!input.value) {
-      input.onChange(false);
-    }
-  }
-
   render() {
     const {
       help,
