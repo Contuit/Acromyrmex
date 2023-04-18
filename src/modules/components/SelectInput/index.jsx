@@ -36,10 +36,6 @@ class SelectInput extends React.Component {
     this.templateOptionRenderer = this.templateOptionRenderer.bind(this);
   }
 
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
-
   componentDidUpdate() {
     const myOptions = this.getOptions();
     const { enableEmpty, multi } = this.props;
