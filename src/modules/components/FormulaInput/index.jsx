@@ -103,8 +103,6 @@ class FormulaInput extends React.Component {
   }
 }
 
-FormulaInput.shouldComponentUpdate = FormField.shouldFormFieldUpdate;
-
 FormulaInput.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape()), // data
   formulas: PropTypes.arrayOf(PropTypes.shape()), // formulas (COUNT, SUM)
