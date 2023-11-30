@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 // from: https://gist.github.com/insin/bbf116e8ea10ef38447b
 import _ from 'underscore';
 import React from 'react';
@@ -30,7 +31,7 @@ class SelectInput extends React.Component {
     this.state = {
       // value: '',
       showModal: false,
-      pendingVal: null
+      pendingVal: null,
     };
 
     this.templateOptionRenderer = this.templateOptionRenderer.bind(this);
@@ -45,7 +46,7 @@ class SelectInput extends React.Component {
     const { enableEmpty, multi } = this.props;
 
     if (!this.valueInOptions() && !enableEmpty && myOptions[0] && !multi) {
-      const firstOption = myOptions.find(o => !o.disabled) || myOptions[0];
+      const firstOption = myOptions.find((o) => !o.disabled) || myOptions[0];
       if (firstOption) {
         this.sendChange(firstOption.value);
       }
@@ -54,10 +55,10 @@ class SelectInput extends React.Component {
 
   getOptions() {
     const { options, enableAll, templateOptions } = this.props;
-    const myOptions = options.map(item => ({
+    const myOptions = options.map((item) => ({
       ...item,
       value: item.id,
-      label: item.name
+      label: item.name,
     }));
 
     if (enableAll) {
@@ -65,7 +66,7 @@ class SelectInput extends React.Component {
     }
 
     if (templateOptions.length) {
-      myOptions.push(...templateOptions.map(o => ({ ...o, label: o.name, value: o.textValue })));
+      myOptions.push(...templateOptions.map((o) => ({ ...o, label: o.name, value: o.textValue })));
     }
 
     return myOptions;
@@ -91,7 +92,7 @@ class SelectInput extends React.Component {
     const value = this.getValue();
 
     let valFound = false;
-    _.each(myOptions, option => {
+    _.each(myOptions, (option) => {
       valFound = valFound || option.value === value || JSON.stringify(option.value) === value;
     });
 
@@ -111,7 +112,7 @@ class SelectInput extends React.Component {
 
     // for multi select, comes back as list of val.value
     if (multi) {
-      update = update.map(value => value.value);
+      update = update.map((value) => value.value);
     }
 
     if (jsonParse) {
@@ -135,7 +136,7 @@ class SelectInput extends React.Component {
 
   templateOptionRenderer(option) {
     const {
-      input: { ...inputProps }
+      input: { ...inputProps },
     } = this.props;
     if (option.textValue) {
       return (
@@ -174,7 +175,7 @@ class SelectInput extends React.Component {
       addonAfter,
       addonBefore,
       addonCustomBefore,
-      addonCustomAfter
+      addonCustomAfter,
     } = this.props;
     const { showModal, pendingVal } = this.state;
 
@@ -202,14 +203,14 @@ class SelectInput extends React.Component {
         valueRenderer={valueRenderer || SelectInput.templateValueRenderer}
         joinValues
         multi={multi}
-        onChange={val => {
+        onChange={(val) => {
           if (confirm) {
             this.setState({ showModal: true, pendingVal: val });
           } else {
             this.handleChange(val);
           }
         }}
-        ref={select => {
+        ref={(select) => {
           this.select = select;
         }}
       />
@@ -276,7 +277,7 @@ SelectInput.propTypes = {
   addonAfter: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   addonBefore: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   addonCustomAfter: PropTypes.node,
-  addonCustomBefore: PropTypes.node
+  addonCustomBefore: PropTypes.node,
 };
 
 SelectInput.defaultProps = {
@@ -302,7 +303,7 @@ SelectInput.defaultProps = {
   addonAfter: null,
   addonBefore: null,
   addonCustomAfter: null,
-  addonCustomBefore: null
+  addonCustomBefore: null,
 };
 
-module.exports = SelectInput;
+export default SelectInput;

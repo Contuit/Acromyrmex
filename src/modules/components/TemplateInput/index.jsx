@@ -11,7 +11,7 @@ class TemplateInput extends React.Component {
     super(props);
 
     this.state = {
-      focused: false
+      focused: false,
     };
 
     this.renderOption = this.renderOption.bind(this);
@@ -51,7 +51,7 @@ class TemplateInput extends React.Component {
       // disabled,
       fixOptions,
       maxCols,
-      plainText
+      plainText,
     } = this.props;
     let { type } = this.props;
     const { focused } = this.state;
@@ -119,7 +119,7 @@ TemplateInput.propTypes = {
   addonCustomBefore: PropTypes.node,
   maxCols: PropTypes.number,
   fixOptions: PropTypes.func,
-  plainText: PropTypes.bool
+  plainText: PropTypes.bool,
 };
 
 TemplateInput.defaultProps = {
@@ -137,7 +137,7 @@ TemplateInput.defaultProps = {
   addonCustomBefore: null,
   maxCols: 12,
   fixOptions: undefined,
-  plainText: false
+  plainText: false,
 };
 
 export default TemplateInput;

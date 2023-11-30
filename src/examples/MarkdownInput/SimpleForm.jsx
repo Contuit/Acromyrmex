@@ -11,7 +11,7 @@ class SimpleForm extends React.Component {
 
     this.state = {
       // options: [],
-      options: startingOptions
+      options: startingOptions,
     };
 
     // simulate the options coming in delayed
@@ -20,7 +20,7 @@ class SimpleForm extends React.Component {
       // eslint-disable-next-line react/destructuring-assignment, react/prop-types
       this.props.change(
         'plainMarkdown',
-        '{dfasdfsdg3q34t.ip-address} {dfasdfsdg3q34t.mac-address} '
+        '{dfasdfsdg3q34t.ip-address} {dfasdfsdg3q34t.mac-address} ',
       );
     }, 2000);
   }
@@ -74,7 +74,7 @@ SimpleForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool.isRequired,
   // change: PropTypes.func.isRequired,
 };
 
@@ -82,6 +82,6 @@ export default reduxForm({
   form: 'simple', // a unique identifier for this form
   initialValues: {
     // formula: '$COUNT$ {dfasdferwegsf.replacement-workstation}',
-    plainMarkdown: ''
-  }
+    plainMarkdown: '',
+  },
 })(SimpleForm);

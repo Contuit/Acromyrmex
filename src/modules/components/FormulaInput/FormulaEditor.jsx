@@ -20,8 +20,8 @@ class FormulaEditor extends OurEditor {
         trigger: '$',
         suggestionProp: 'formulas',
         theme: {
-          mention: 'mention-formula'
-        }
+          mention: 'mention-formula',
+        },
       },
       {
         regex: ATTRIBUTE_REGEX,
@@ -29,9 +29,9 @@ class FormulaEditor extends OurEditor {
         trigger: '#',
         suggestionProp: 'attributes',
         theme: {
-          mention: 'mention-attribute'
-        }
-      }
+          mention: 'mention-attribute',
+        },
+      },
     ];
   }
 }

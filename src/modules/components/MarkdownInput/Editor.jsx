@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
@@ -29,7 +30,7 @@ class OurEditor extends React.Component {
 
     this.state = {
       // Editor state is
-      suggestions: []
+      suggestions: [],
     };
 
     this.mentionFunctionInfo = [];
@@ -71,25 +72,11 @@ class OurEditor extends React.Component {
           this.onChange(
             EditorState.push(
               editorState,
-              this.getStateFromMarkdown(input.value).getCurrentContent()
-            )
+              this.getStateFromMarkdown(input.value).getCurrentContent(),
+            ),
           );
         }
       });
-    }
-  }
-
-  componentDidUpdate() {
-    const {
-      input: { value }
-    } = this.props;
-    const { editorState } = this.state;
-    const md = this.getStateToMarkdown(editorState);
-    // update the value if needed
-    if (md !== value) {
-      this.onChange(
-        EditorState.push(editorState, this.getStateFromMarkdown(value).getCurrentContent())
-      );
     }
   }
 
@@ -98,7 +85,7 @@ class OurEditor extends React.Component {
    */
   onChange(editorState) {
     const {
-      input: { onChange }
+      input: { onChange },
     } = this.props;
     const md = this.getStateToMarkdown(editorState);
 
@@ -129,7 +116,7 @@ class OurEditor extends React.Component {
       plainText
         ? stateFromPlainText(value, suggestions, this.mentionStateFromMarkdownFunctions)
         : stateFromMarkdown(value, suggestions, this.mentionStateFromMarkdownFunctions),
-      new MultiDecorator([new CompositeDecorator([LinkDecorator])])
+      new MultiDecorator([new CompositeDecorator([LinkDecorator])]),
     );
   }
 
@@ -139,7 +126,7 @@ class OurEditor extends React.Component {
     if (plainText) {
       return stateToPlainText(
         editorState.getCurrentContent(),
-        this.mentionStateToMarkdownFunctions
+        this.mentionStateToMarkdownFunctions,
       );
     }
 
@@ -163,11 +150,11 @@ class OurEditor extends React.Component {
       regex: TEMPLATE_REGEX,
       index: OPTION_MENTION_INDEX,
       trigger: '{',
-      suggestionProp: 'options'
+      suggestionProp: 'options',
     });
 
     if (this.extraMentions) {
-      this.extraMentions().forEach(extraMention => {
+      this.extraMentions().forEach((extraMention) => {
         mentions[extraMention.index] = this.addMentionPlugin(extraMention);
       });
     }
@@ -178,7 +165,7 @@ class OurEditor extends React.Component {
     if (hasValue) {
       const newState = EditorState.push(
         editorState,
-        this.getStateFromMarkdown(input.value, options).getCurrentContent()
+        this.getStateFromMarkdown(input.value, options).getCurrentContent(),
       );
 
       const md = this.getStateToMarkdown(newState);
@@ -197,9 +184,9 @@ class OurEditor extends React.Component {
       createMentionPlugin({
         entityMutability: 'IMMUTABLE',
         mentionTrigger: functionInfo.trigger,
-        theme: { ...defaultTheme, ...functionInfo.theme }
+        theme: { ...defaultTheme, ...functionInfo.theme },
         // supportWhitespace: true,
-      })
+      }),
     );
 
     this.searchFunctions.push(this.onSuggestionSearch.bind(this, functionInfo));
@@ -207,8 +194,8 @@ class OurEditor extends React.Component {
     this.mentionStateFromMarkdownFunctions.push((raw, entityCount, block, mentions, tempText) => {
       const { text } = block;
       // Loop over the matches
-      block.text = text.replace(functionInfo.regex, match => {
-        const matchingOption = mentions.find(m => m.textValue === match);
+      block.text = text.replace(functionInfo.regex, (match) => {
+        const matchingOption = mentions.find((m) => m.textValue === match);
 
         if (!matchingOption) {
           return match;
@@ -217,10 +204,10 @@ class OurEditor extends React.Component {
         const entityRange = {
           offset: tempText.indexOf(match),
           length: matchingOption.name.length,
-          key: entityCount
+          key: entityCount,
         };
 
-        block.entityRanges.forEach(range => {
+        block.entityRanges.forEach((range) => {
           const thisEnd = entityRange.offset + entityRange.length;
           const otherOffset = range.offset;
           const difference = match.length - matchingOption.name.length;
@@ -235,8 +222,8 @@ class OurEditor extends React.Component {
           type: `${functionInfo.trigger}mention`,
           mutability: 'IMMUTABLE',
           data: {
-            mention: Map(matchingOption)
-          }
+            mention: Map(matchingOption),
+          },
         };
 
         entityCount += 1;
@@ -250,7 +237,7 @@ class OurEditor extends React.Component {
       return { entityCount, tempText };
     });
 
-    this.mentionStateToMarkdownFunctions.push(entity => {
+    this.mentionStateToMarkdownFunctions.push((entity) => {
       if (entity.getType() !== `${functionInfo.trigger}mention`) {
         return false;
       }
@@ -285,7 +272,7 @@ class OurEditor extends React.Component {
     let contentState = editorState.getCurrentContent();
     const selection = editorState.getSelection();
     contentState = contentState.createEntity(ENTITY_TYPE.LINK, 'MUTABLE', {
-      url
+      url,
     });
     const entityKey = contentState.getLastCreatedEntityKey();
     const newEditorState = EditorState.push(editorState, contentState);
@@ -339,7 +326,7 @@ class OurEditor extends React.Component {
         decorators={[LinkDecorator]}
         onFocus={onFocus}
         onBlur={onBlur}
-        ref={e => {
+        ref={(e) => {
           this.editor = e;
         }}
       />
@@ -391,7 +378,7 @@ OurEditor.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   fixOptions: PropTypes.func,
-  plainText: PropTypes.bool
+  plainText: PropTypes.bool,
 };
 
 OurEditor.defaultProps = {
@@ -401,8 +388,8 @@ OurEditor.defaultProps = {
   className: '',
   onFocus: () => {},
   onBlur: () => {},
-  fixOptions: o => ({ ...o, attributeName: o.name, name: `${o.stepName} -> ${o.name}` }),
-  plainText: false
+  fixOptions: (o) => ({ ...o, attributeName: o.name, name: `${o.stepName} -> ${o.name}` }),
+  plainText: false,
 };
 
 export default OurEditor;

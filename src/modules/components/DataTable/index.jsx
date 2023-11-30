@@ -1,9 +1,22 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-will-update-set-state */
+/* eslint-disable react/no-deprecated */
+/* eslint-disable max-len */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/sort-comp */
 import _ from 'underscore';
 import moment from 'moment';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Pagination from 'react-bootstrap/lib/Pagination';
+import Pagination from 'react-bootstrap/Pagination';
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import MultiGrid from 'react-virtualized/dist/commonjs/MultiGrid';
 import CellMeasurer from 'react-virtualized/dist/commonjs/CellMeasurer';
@@ -95,7 +108,7 @@ class DataGrid extends Component {
       case 'array':
         return (
           <ul>
-            {value.map(item => (
+            {value.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
@@ -112,7 +125,7 @@ class DataGrid extends Component {
       ? { defaultHeight: 45, defaultWidth: 300 }
       : {
           fixedWidth: true,
-          defaultHeight: 45
+          defaultHeight: 45,
           // minHeight: browser.lessThan.small ? 40 : 50,
         };
 
@@ -130,7 +143,7 @@ class DataGrid extends Component {
       filterOpened: false,
       scrolledAllLeft: true,
 
-      needsRefresh: false
+      needsRefresh: false,
     };
 
     // stores the inputs
@@ -145,7 +158,7 @@ class DataGrid extends Component {
 
     // throttle filter changing
     this.callDataUpdate = _.throttle(this.callDataUpdate.bind(this), 750, {
-      leading: true
+      leading: true,
     });
   }
 
@@ -197,8 +210,8 @@ class DataGrid extends Component {
       this.mainGrid &&
       (!_.isEqual(nextProps.items, this.props.items) ||
         !_.isEqual(
-          _.map(nextProps.columns, c => ({ name: c.name, key: c.key })),
-          _.map(this.props.columns, c => ({ name: c.name, key: c.key }))
+          _.map(nextProps.columns, (c) => ({ name: c.name, key: c.key })),
+          _.map(this.props.columns, (c) => ({ name: c.name, key: c.key })),
         ))
     ) {
       this.cellSizeCache._rowCount = 0;
@@ -253,12 +266,12 @@ class DataGrid extends Component {
     this.setState(
       {
         filterOpened: !this.state.filterOpened,
-        focusCol: this.state.filterOpened ? null : colKey
+        focusCol: this.state.filterOpened ? null : colKey,
       },
       () => {
         if (!this.mainGrid) return;
         this.mainGrid.forceUpdateGrids();
-      }
+      },
     );
     // prevent bubbling to the header
     return false;
@@ -271,7 +284,7 @@ class DataGrid extends Component {
   onFilterChanged(filterObj) {
     const newFilters = {
       ...this.state.filters,
-      [filterObj.key]: filterObj
+      [filterObj.key]: filterObj,
     };
 
     this.setState({ ...this.state, filters: newFilters }, () => {
@@ -292,7 +305,7 @@ class DataGrid extends Component {
   }
 
   getRowCount() {
-    const length = this.getRows().length;
+    const { length } = this.getRows();
     return this.props.paged ? Math.min(length, this.props.pageSize + 1) : length;
   }
 
@@ -308,7 +321,7 @@ class DataGrid extends Component {
     // adds defaults to the column
     return _.defaults(this.getColumns()[index], {
       sortable: true,
-      filterable: true
+      filterable: true,
     });
   }
 
@@ -323,7 +336,7 @@ class DataGrid extends Component {
 
     // get the name of each column into an array
     const colNames = {};
-    this.getColumns().forEach(col => {
+    this.getColumns().forEach((col) => {
       colNames[col.key] = col.name;
     });
 
@@ -398,8 +411,8 @@ class DataGrid extends Component {
   }
 
   _filterRows(items) {
-    const filters = this.state.filters;
-    if (filters === {}) {
+    const { filters } = this.state;
+    if (Object.keys(filters).length === 0) {
       return items;
     }
 
@@ -442,8 +455,8 @@ class DataGrid extends Component {
       }
     };
 
-    return items.filter(item => {
-      let result = { keep: true };
+    return items.filter((item) => {
+      const result = { keep: true };
 
       Object.keys(filters).forEach(filterItem.bind(null, result, item));
 
@@ -455,7 +468,7 @@ class DataGrid extends Component {
     const { sortBy, sortDirection } = this.state;
     return DataGrid.sortRows(items, this.getColumns(), {
       sortBy,
-      sortDirection
+      sortDirection,
     });
   }
 
@@ -493,7 +506,6 @@ class DataGrid extends Component {
     }
 
     if (!_.isEqual(updateObj, {})) {
-      console.log(updateObj);
       this.setState(updateObj, () => {
         if (!this.mainGrid) return;
         this.mainGrid.forceUpdateGrids();
@@ -508,11 +520,6 @@ class DataGrid extends Component {
     const boxShadow = this.state.scrolledAllLeft ? false : '1px 3px 3px #a2a2a2';
     const colCount = this.getColumnCount();
     const rowCount = this.getRowCount();
-    console.log(rowCount);
-
-    // if (rowCount < 2) {
-    //   return DataGrid.emptyRenderer();
-    // }
 
     return (
       <MultiGrid
@@ -530,10 +537,10 @@ class DataGrid extends Component {
         onScroll={this.onGridScroll}
         enableFixedColumnScroll
         className={classNames('data-grid', {
-          'scrolled-left': this.state.scrolledAllLeft
+          'scrolled-left': this.state.scrolledAllLeft,
         })}
         styleBottomLeftGrid={{ boxShadow }}
-        ref={grid => {
+        ref={(grid) => {
           this.mainGrid = grid;
         }}
       />
@@ -548,7 +555,7 @@ class DataGrid extends Component {
       return;
     }
 
-    let newSortObj = {};
+    const newSortObj = {};
     if (sortBy === column.key && column.sortable) {
       // clicking the header that is currently sorted invokes sorting in the opposite direction
       newSortObj.sortBy = column.key;
@@ -584,7 +591,7 @@ class DataGrid extends Component {
     const rowIsHeader = rowIndex === 0;
     const cellStyles = {
       ...style,
-      width: this.getColumnWidth({ index: columnIndex })
+      width: this.getColumnWidth({ index: columnIndex }),
     };
 
     if (rowIsHeader) {
@@ -598,7 +605,7 @@ class DataGrid extends Component {
         key={`${columnIndex},${rowIndex}`}
         parent={parent}
         rowIndex={rowIndex}
-        ref={cellMeasurer => {
+        ref={(cellMeasurer) => {
           this.cellMeasurer = cellMeasurer;
         }}
       >
@@ -614,18 +621,18 @@ class DataGrid extends Component {
             'grid-cell-filter': rowIsHeader && this.state.filterOpened,
             'grid-cell-sort': rowIsHeader && sortBy === column.key,
             'grid-row-hovered': rowIndex === this.state.hoveredRowIndex,
-            'grid-column-hovered': columnIndex === this.state.hoveredColumnIndex
+            'grid-column-hovered': columnIndex === this.state.hoveredColumnIndex,
           })}
           onMouseOver={() => {
             this.setState(
               {
                 hoveredColumnIndex: columnIndex,
-                hoveredRowIndex: rowIndex
+                hoveredRowIndex: rowIndex,
               },
               () => {
                 if (!this.mainGrid) return;
                 this.mainGrid.forceUpdateGrids();
-              }
+              },
             );
           }}
           onClick={() => {
@@ -642,7 +649,7 @@ class DataGrid extends Component {
               <i
                 className={classNames('fa', {
                   'fa-sort-asc': sortDirection === SortDirection.ASC,
-                  'fa-sort-desc': sortDirection === SortDirection.DESC
+                  'fa-sort-desc': sortDirection === SortDirection.DESC,
                 })}
               />
             </span>
@@ -655,18 +662,18 @@ class DataGrid extends Component {
             <input
               type="text"
               className="filter-input"
-              onClick={e => {
+              onClick={(e) => {
                 // when we click on the input we need to prevent sorting
                 e.stopPropagation();
               }}
-              ref={input => {
+              ref={(input) => {
                 this.filters[column.key] = input;
               }}
               value={filter && filter.value ? filter.value : ''}
-              onChange={e => {
+              onChange={(e) => {
                 const filterObj = {
                   key: column.key,
-                  value: e.target.value
+                  value: e.target.value,
                 };
 
                 this.onFilterChanged(filterObj);
@@ -677,10 +684,10 @@ class DataGrid extends Component {
           {rowIsHeader && column.filterable && (
             <a
               className={classNames('grid-filter-indicator', {
-                active: filter && filter.value
+                active: filter && filter.value,
               })}
               tabIndex={columnIndex}
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 this.onFilterClicked(column.key);
               }}
@@ -698,16 +705,11 @@ class DataGrid extends Component {
     const filter = this.state.filters;
     const rowCount = this.getRowCount();
     const colCount = this.getColumnCount();
-    // const rows = this.getRows();
-    // const cols = this.getColumns().map(c => ({ key: c.key, name: c.name }));
-
-    // console.log(JSON.stringify(rows));
-    // console.log(cols);
 
     return (
       <div
         className="grid-container"
-        ref={container => {
+        ref={(container) => {
           this.container = container;
         }}
       >
@@ -717,8 +719,6 @@ class DataGrid extends Component {
             needsRefresh={this.state.needsRefresh}
             rowCount={rowCount}
             colCount={colCount}
-            /* items={JSON.stringify(rows)}
-            columns={cols} */
             currentPage={currentPage}
             filter={filter}
           >
@@ -728,7 +728,7 @@ class DataGrid extends Component {
         {paged && this._renderFooter()}
         <div
           className={classNames('scroll-x-indicator', {
-            faded: this.state.scrolledAllRight
+            faded: this.state.scrolledAllRight,
           })}
         >
           <i className="fa fa-fw fa-angle-double-right" />
@@ -750,12 +750,12 @@ class DataGrid extends Component {
             </em>
           </div>
           <Pagination
-            bsSize="sm"
+            size="small"
             items={Math.ceil((1.0 * totalItemCount) / pageSize)}
             activePage={currentPage}
             maxButtons={4}
             ellipsis
-            onSelect={eventKey => {
+            onSelect={(eventKey) => {
               onUpdateDataNeeded({ page: eventKey });
             }}
             prev
@@ -775,7 +775,7 @@ DataGrid.propTypes = {
   gridProps: PropTypes.shape(),
   defaultSort: PropTypes.shape({
     sortBy: PropTypes.string,
-    sortDirection: PropTypes.string
+    sortDirection: PropTypes.string,
   }),
   columnWidthMultiplier: PropTypes.number,
   fixedColumns: PropTypes.number,
@@ -787,7 +787,7 @@ DataGrid.propTypes = {
   pageSize: PropTypes.number,
   currentPage: PropTypes.number,
   totalItemCount: PropTypes.number,
-  onUpdateDataNeeded: PropTypes.func
+  onUpdateDataNeeded: PropTypes.func,
 };
 
 DataGrid.defaultProps = {
@@ -805,7 +805,7 @@ DataGrid.defaultProps = {
   pageSize: 50,
   currentPage: 1,
   totalItemCount: 0,
-  onUpdateDataNeeded: () => {}
+  onUpdateDataNeeded: () => {},
 };
 
 export default DataGrid;

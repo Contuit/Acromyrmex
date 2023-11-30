@@ -1,7 +1,8 @@
-/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -29,12 +30,21 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 import Pagination from 'react-bootstrap/Pagination';
 import Tooltip from 'react-bootstrap/Tooltip';
-import Overlay from 'react-bootstrap/Overlay';
+import Card from 'react-bootstrap/Card';
 import SplitButton from 'react-bootstrap/SplitButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import Overlay from 'react-bootstrap/Overlay';
+import Container from 'react-bootstrap/Container';
 
-function Jumbotron({ children }) {
-  return <div className="jumbotron">{children}</div>;
+function SButton(props) {
+  return <Button size="small" variant="primary" {...props} />;
+}
+
+function Jumbotron({ children, ...props }) {
+  return (
+    <div className="jumbotron" {...props}>
+      {children}
+    </div>
+  );
 }
 
 function Checkbox(props) {
@@ -45,8 +55,12 @@ function Label(props) {
   return <Form.Label {...props} />;
 }
 
-function Well({ children }) {
-  return <div className="well">{children}</div>;
+function Well({ children, ...props }) {
+  return (
+    <div className="well" {...props}>
+      {children}
+    </div>
+  );
 }
 
 const MenuItem = Dropdown.Item;
@@ -56,6 +70,7 @@ const HelpBlock = Form.Text;
 export {
   Col,
   Row,
+  SButton,
   Button,
   DropdownButton,
   ButtonGroup,
@@ -66,7 +81,6 @@ export {
   Image,
   Modal,
   Accordion,
-  Jumbotron,
   Nav,
   Navbar,
   NavItem,
@@ -76,19 +90,22 @@ export {
   Popover,
   OverlayTrigger,
   ProgressBar,
-  MenuItem,
   Collapse,
   Tabs,
   Tab,
-  Label,
   ListGroup,
   ListGroupItem,
   Pagination,
-  Well,
   Tooltip,
-  HelpBlock,
+  Jumbotron,
+  MenuItem,
   Checkbox,
+  Well,
+  Card,
+  Label,
   ControlLabel,
+  HelpBlock,
+  SplitButton,
   Overlay,
-  SplitButton
+  Container,
 };

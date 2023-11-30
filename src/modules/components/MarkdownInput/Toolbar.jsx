@@ -9,18 +9,18 @@ import {
   Popover,
   FormControl,
   Col,
-  FormGroup
+  FormGroup,
 } from '../../utility/UiComponents';
 
-const ToolbarButton = props => {
+function ToolbarButton(props) {
   const { onClick, children, ...otherProps } = props;
 
   return (
     <Button
-      bsStyle="primary"
-      bsSize="xsmall"
+      variant="primary"
+      size="xsmall"
       {...otherProps}
-      onMouseDown={e => {
+      onMouseDown={(e) => {
         e.preventDefault();
         onClick(e);
       }}
@@ -28,11 +28,11 @@ const ToolbarButton = props => {
       {children}
     </Button>
   );
-};
+}
 
 ToolbarButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 class Toolbar extends React.Component {
@@ -42,7 +42,7 @@ class Toolbar extends React.Component {
     this.state = {
       popoverTarget: null,
       showLinkOverlay: false,
-      linkText: ''
+      linkText: '',
     };
   }
 
@@ -58,7 +58,7 @@ class Toolbar extends React.Component {
       redoSize,
       blockType,
       selection,
-      getEntityAtCursor
+      getEntityAtCursor,
     } = this.props;
 
     const { linkText, showLinkOverlay, popoverTarget } = this.state;
@@ -84,8 +84,8 @@ class Toolbar extends React.Component {
         </ButtonGroup>{' '}
         <SplitButton
           title="Normal"
-          bsSize="xsmall"
-          bsStyle="primary"
+          size="xsmall"
+          variant="primary"
           id="formatting-split"
           active={blockType === 'unstyled'}
           onClick={() => {
@@ -151,10 +151,10 @@ class Toolbar extends React.Component {
         </SplitButton>{' '}
         <ButtonGroup>
           <ToolbarButton
-            onClick={e => {
+            onClick={(e) => {
               this.setState({
                 showLinkOverlay: !showLinkOverlay,
-                popoverTarget: e.currentTarget
+                popoverTarget: e.currentTarget,
               });
               // onLinkClicked();
             }}
@@ -169,13 +169,13 @@ class Toolbar extends React.Component {
             container={this}
           >
             <Popover style={{ marginLeft: 22, marginTop: 15 }} id="link-popover">
-              <FormGroup bsSize="small" className="clearfix" style={{ padding: 0, margin: 0 }}>
+              <FormGroup size="small" className="clearfix" style={{ padding: 0, margin: 0 }}>
                 <Col xs={8} style={{ padding: 0, margin: 0 }}>
                   <FormControl
                     type="text"
                     placeholder="http://"
                     value={linkText}
-                    onChange={e => {
+                    onChange={(e) => {
                       this.setState({ linkText: e.target.value });
                     }}
                   />
@@ -188,8 +188,8 @@ class Toolbar extends React.Component {
                         this.setState({ showLinkOverlay: false });
                       }}
                       disabled={linkText.length < 1}
-                      bsSize="small"
-                      bsStyle="success"
+                      size="small"
+                      variant="success"
                     >
                       <i className="fa fa-check" />
                     </ToolbarButton>
@@ -198,8 +198,8 @@ class Toolbar extends React.Component {
                         this.setState({ showLinkOverlay: false });
                       }}
                       disabled={linkText.length < 1}
-                      bsSize="small"
-                      bsStyle="danger"
+                      size="small"
+                      variant="danger"
                     >
                       <i className="fa fa-times" />
                     </ToolbarButton>
@@ -239,7 +239,7 @@ Toolbar.propTypes = {
   redoSize: PropTypes.number.isRequired,
   blockType: PropTypes.string.isRequired,
   selection: PropTypes.shape().isRequired,
-  getEntityAtCursor: PropTypes.func.isRequired
+  getEntityAtCursor: PropTypes.func.isRequired,
 };
 
 export default Toolbar;

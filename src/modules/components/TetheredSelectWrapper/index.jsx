@@ -28,17 +28,17 @@ export default class TetheredSelectWrap extends Select {
           {
             to: 'window',
             attachment: 'together',
-            pin: ['top']
-          }
+            pin: ['top'],
+          },
         ]}
         renderElementTo="body"
         targetAttachment="top left"
-        renderTarget={ref => <div ref={ref} />}
-        renderElement={ref => (
+        renderTarget={(ref) => <div ref={ref} />}
+        renderElement={(ref) => (
           <div ref={ref}>
             <div />
             {React.cloneElement(menu, {
-              style: { position: 'static', width: selectWidth }
+              style: { position: 'static', width: selectWidth },
             })}
           </div>
         )}

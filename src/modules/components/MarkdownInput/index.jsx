@@ -11,7 +11,7 @@ class MarkdownInput extends React.Component {
     super(props);
 
     this.state = {
-      focused: false
+      focused: false,
     };
   }
 
@@ -30,7 +30,7 @@ class MarkdownInput extends React.Component {
       input: { ...inputProps },
       meta,
       maxCols,
-      plainText
+      plainText,
     } = this.props;
     let { type } = this.props;
     const { focused } = this.state;
@@ -92,7 +92,7 @@ MarkdownInput.propTypes = {
   addonCustomAfter: PropTypes.node,
   addonCustomBefore: PropTypes.node,
   maxCols: PropTypes.number,
-  plainText: PropTypes.bool
+  plainText: PropTypes.bool,
 };
 
 MarkdownInput.defaultProps = {
@@ -108,7 +108,7 @@ MarkdownInput.defaultProps = {
   addonCustomAfter: null,
   addonCustomBefore: null,
   maxCols: 12,
-  plainText: false
+  plainText: false,
 };
 
 export default MarkdownInput;

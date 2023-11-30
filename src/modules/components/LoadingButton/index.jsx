@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../../utility/UiComponents';
 import Loading from '../Loading';
 
-const LoadingButton = props => {
+function LoadingButton(props) {
   const { icon, label, loading, disabled, loadingLabel, ...btnProps } = props;
 
   return (
@@ -12,7 +12,8 @@ const LoadingButton = props => {
         <span>
           <Loading inline delay={false} />
           {icon && <img src={icon} alt="..." className="LoadingButton__icon" />}
-          {loadingLabel || `${label}ing`}&hellip;
+          {loadingLabel || `${label}ing`}
+          &hellip;
         </span>
       ) : (
         <span>
@@ -22,7 +23,7 @@ const LoadingButton = props => {
       )}
     </Button>
   );
-};
+}
 
 LoadingButton.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
@@ -30,13 +31,13 @@ LoadingButton.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   // Defaults to label + 'ing' if not provided
-  loadingLabel: PropTypes.string
+  loadingLabel: PropTypes.string,
 };
 
 LoadingButton.defaultProps = {
   icon: false,
   disabled: false,
-  loadingLabel: ''
+  loadingLabel: '',
 };
 
 export default LoadingButton;

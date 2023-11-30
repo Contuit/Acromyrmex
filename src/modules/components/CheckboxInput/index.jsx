@@ -8,12 +8,21 @@ import {
   FormGroup,
   OverlayTrigger,
   HelpBlock,
-  Popover
+  Popover,
 } from '../../utility/UiComponents';
 
 import FormField from '../FormField';
 
 class CheckboxInput extends React.Component {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { input } = this.props;
+
+    if (!input.value) {
+      input.onChange(false);
+    }
+  }
+
   render() {
     const {
       help,
@@ -22,7 +31,7 @@ class CheckboxInput extends React.Component {
       noLabel,
       disabled,
       input: { ...inputProps },
-      meta: { error }
+      meta: { error },
     } = this.props;
 
     const helpPopover = <Popover id={`field-${inputProps.name}-help`}>{help}</Popover>;
@@ -45,23 +54,24 @@ class CheckboxInput extends React.Component {
             checked={
               (_.isString(value) && value === 'true') || (_.isBoolean(value) && inputProps.value)
             }
-          >
-            {!noLabel && (
-              <span>
-                {prefix} {label}{' '}
-                {help && (
-                  <OverlayTrigger
-                    trigger={['hover', 'focus']}
-                    placement="right"
-                    overlay={helpPopover}
-                    rootClose
-                  >
-                    <i className="fa fa-question-circle" />
-                  </OverlayTrigger>
-                )}
-              </span>
-            )}
-          </Checkbox>
+            label={
+              !noLabel && (
+                <span>
+                  {prefix} {label}{' '}
+                  {help && (
+                    <OverlayTrigger
+                      trigger={['hover', 'focus']}
+                      placement="right"
+                      overlay={helpPopover}
+                      rootClose
+                    >
+                      <i className="fa fa-question-circle" />
+                    </OverlayTrigger>
+                  )}
+                </span>
+              )
+            }
+          />
         </Col>
         <Col xs={12} md={width} mdOffset={offset}>
           {error && <HelpBlock>{error}</HelpBlock>}
@@ -80,7 +90,7 @@ CheckboxInput.propTypes = {
   prefix: PropTypes.node,
   input: PropTypes.shape().isRequired,
   noLabel: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 CheckboxInput.defaultProps = {
@@ -88,7 +98,7 @@ CheckboxInput.defaultProps = {
   label: '',
   prefix: null,
   noLabel: false,
-  disabled: false
+  disabled: false,
 };
 
 export default CheckboxInput;

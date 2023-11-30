@@ -156,7 +156,7 @@ class MarkupGenerator {
           // mentions
           let returnVal = false;
 
-          this.mentionStateToMarkdownFunctions.forEach(func => {
+          this.mentionStateToMarkdownFunctions.forEach((func) => {
             const result = func(entity);
             if (result) {
               returnVal = result;
@@ -178,6 +178,7 @@ export default function stateToMarkdown(content, mentionStateToMarkdownFunctions
   try {
     pt = new MarkupGenerator(content, mentionStateToMarkdownFunctions).generate();
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
   return pt;

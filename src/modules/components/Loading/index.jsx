@@ -8,7 +8,7 @@ class Loading extends React.Component {
     const { delay } = props;
     super(props);
     this.state = {
-      delaying: !!delay
+      delaying: !!delay,
     };
   }
 
@@ -36,12 +36,17 @@ class Loading extends React.Component {
     const className = classNames('loading', {
       'loading--delaying': delaying,
       'loading--displaying': delay && !delaying,
-      'loading--inline': inline
+      'loading--inline': inline,
     });
     return (
       <div className={className}>
         <i className="fa fa-spin fa-spinner pull-left" />
-        {text && <div className="Loading__text pull-left">{text}&hellip;</div>}
+        {text && (
+          <div className="Loading__text pull-left">
+            {text}
+            &hellip;
+          </div>
+        )}
       </div>
     );
   }
@@ -50,13 +55,13 @@ class Loading extends React.Component {
 Loading.propTypes = {
   delay: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   inline: PropTypes.bool,
-  text: PropTypes.string
+  text: PropTypes.string,
 };
 
 Loading.defaultProps = {
   delay: 500,
   inline: false,
-  text: ''
+  text: '',
 };
 
 export default Loading;

@@ -11,7 +11,7 @@ class FormulaInput extends React.Component {
     super(props);
 
     this.state = {
-      focused: false
+      focused: false,
     };
 
     this.renderOption = this.renderOption.bind(this);
@@ -51,7 +51,7 @@ class FormulaInput extends React.Component {
       input: { ...inputProps },
       meta,
       // disabled,
-      maxCols
+      maxCols,
     } = this.props;
     let { type } = this.props;
     const { focused } = this.state;
@@ -82,7 +82,7 @@ class FormulaInput extends React.Component {
           disableToolbar
           input={inputProps}
           className="template-input"
-          fixOptions={o => ({ ...o })}
+          fixOptions={(o) => ({ ...o })}
           onFocus={() => {
             this.setState({ focused: true });
           }}
@@ -125,7 +125,7 @@ FormulaInput.propTypes = {
   addonBefore: PropTypes.string,
   addonCustomAfter: PropTypes.node,
   addonCustomBefore: PropTypes.node,
-  maxCols: PropTypes.number
+  maxCols: PropTypes.number,
 };
 
 FormulaInput.defaultProps = {
@@ -143,7 +143,7 @@ FormulaInput.defaultProps = {
   addonBefore: null,
   addonCustomAfter: null,
   addonCustomBefore: null,
-  maxCols: 12
+  maxCols: 12,
 };
 
 export default FormulaInput;

@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { OverlayTrigger, Popover } from '../../utility/UiComponents';
 import Icon from '../Icon';
 
-const HoverHelp = ({ help, position, name }) => {
-  const helpPopover = <Popover id={`field-${name}-help`}>{help}</Popover>;
+function HoverHelp({ help, position, name }) {
+  const helpPopover = (
+    <Popover id={`field-${name}-help`} placement="left">
+      <Popover.Body>{help}</Popover.Body>
+    </Popover>
+  );
 
   return (
     <OverlayTrigger
@@ -18,19 +22,19 @@ const HoverHelp = ({ help, position, name }) => {
       </span>
     </OverlayTrigger>
   );
-};
+}
 
 // Define property types
 HoverHelp.propTypes = {
   help: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  position: PropTypes.string
+  position: PropTypes.string,
 };
 
 HoverHelp.defaultProps = {
   position: 'right',
   name: 'na',
-  help: ''
+  help: '',
 };
 
 export default HoverHelp;

@@ -9,7 +9,7 @@ import {
   HelpBlock,
   Col,
   Row,
-  InputGroup
+  InputGroup,
 } from '../../utility/UiComponents';
 import './style.css';
 
@@ -20,7 +20,7 @@ const FIELD_EVENT_HANDLER = /^(?:on|handle)[A-Z]/;
  * determine if the field has changed.
  */
 function fieldShallowEquals(field, nextField) {
-  field.foreach(prop => {
+  field.foreach((prop) => {
     // Ignore event handlers, as they continually get recreated by redux-form
     if (!FIELD_EVENT_HANDLER.test(prop) && field[prop] !== nextField[prop]) {
       return false;
@@ -82,7 +82,7 @@ class FormField extends React.Component {
       addonAfter,
       addonCustomBefore,
       addonCustomAfter,
-      children
+      children,
     } = this.props;
 
     if (loading) {
@@ -102,16 +102,16 @@ class FormField extends React.Component {
     if (addonBefore || addonAfter) {
       input = (
         <InputGroup style={{ width: '100%' }}>
-          {addonBefore && <InputGroup.Addon>{addonBefore}</InputGroup.Addon>}
+          {addonBefore && <InputGroup.Text>{addonBefore}</InputGroup.Text>}
           {input}
-          {addonAfter && <InputGroup.Addon>{addonAfter}</InputGroup.Addon>}
+          {addonAfter && <InputGroup.Text>{addonAfter}</InputGroup.Text>}
         </InputGroup>
       );
     }
 
     if (addonCustomBefore || addonCustomAfter) {
       input = (
-        <InputGroup style={{ width: '100%' }}>
+        <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
           {addonCustomBefore}
           {input}
           {addonCustomAfter}
@@ -129,7 +129,7 @@ class FormField extends React.Component {
 
     if (stripped) {
       return (
-        <FormGroup className="clearfix" validationState={validation}>
+        <FormGroup className="clearfix form-group" validationState={validation}>
           {!noLabel && controlLabel} {input}
           {error && <HelpBlock>{error}</HelpBlock>}
         </FormGroup>
@@ -137,7 +137,7 @@ class FormField extends React.Component {
     }
 
     return (
-      <FormGroup className="clearfix" validationState={validation}>
+      <FormGroup className="clearfix form-group" validationState={validation}>
         <Row>
           {!noLabel && (
             <Col xs={maxCols} sm={offset}>
@@ -183,7 +183,7 @@ FormField.propTypes = {
   addonAfter: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   addonBefore: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   addonCustomAfter: PropTypes.node,
-  addonCustomBefore: PropTypes.node
+  addonCustomBefore: PropTypes.node,
 };
 
 FormField.defaultProps = {
@@ -204,7 +204,7 @@ FormField.defaultProps = {
   addonAfter: null,
   addonBefore: null,
   addonCustomAfter: null,
-  addonCustomBefore: null
+  addonCustomBefore: null,
 };
 
 export default FormField;

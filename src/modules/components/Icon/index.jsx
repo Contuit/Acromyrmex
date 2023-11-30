@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Icon = props => {
-  const { edit, help, close, filter, info, remove, upload, download, drag, cart } = props;
+function Icon(props) {
+  const { edit, help, close, filter, info, remove, upload, download, drag, cart, picture } = props;
 
   const className = classNames('fa', {
     'fa-edit': edit,
@@ -15,11 +15,12 @@ const Icon = props => {
     'fa-download': download,
     'fa-info-circle': info,
     'fa-bars': drag,
-    'fa-shopping-cart': cart
+    'fa-shopping-cart': cart,
+    'fa-picture-o': picture,
   });
 
   return <i className={className} />;
-};
+}
 
 Icon.propTypes = {
   edit: PropTypes.bool,
@@ -31,7 +32,8 @@ Icon.propTypes = {
   upload: PropTypes.bool,
   download: PropTypes.bool,
   drag: PropTypes.bool,
-  cart: PropTypes.bool
+  cart: PropTypes.bool,
+  picture: PropTypes.bool,
 };
 
 Icon.defaultProps = {
@@ -44,7 +46,8 @@ Icon.defaultProps = {
   upload: false,
   download: false,
   drag: false,
-  cart: false
+  cart: false,
+  picture: false,
 };
 
 export default Icon;

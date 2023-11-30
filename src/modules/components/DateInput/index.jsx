@@ -17,10 +17,9 @@ class DateInput extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.log({ value: props.input.value, length: props.input.value.length });
     this.state = {
       optionSelected: props.input.value.indexOf('{') > -1 && props.input.value.indexOf('}') > -1,
-      open: false
+      open: false,
     };
   }
 
@@ -70,7 +69,7 @@ class DateInput extends React.Component {
     const calendar = (
       <Calendar
         // autoFocus={autoFocus}
-        // bsSize="small"
+        // size="small"
         format={format}
         showDateInput={false}
         timePicker={showTimeSelect ? timePickerElement : null}
@@ -86,7 +85,7 @@ class DateInput extends React.Component {
             <div className="datetime-options">
               <span>Or, select an option:</span>
               <div className="datetime-options-list">
-                {options.map(o => (
+                {options.map((o) => (
                   <Mention
                     key={o.textValue}
                     mention={o}
@@ -138,11 +137,11 @@ class DateInput extends React.Component {
           calendar={calendar}
           value={valueToUse}
           getCalendarContainer={getCalendarContainer}
-          onOpenChange={newOpen => {
+          onOpenChange={(newOpen) => {
             this.setState({ open: newOpen });
           }}
           open={open}
-          onChange={date => {
+          onChange={(date) => {
             inputProps.onChange(date ? moment(date).toDate() : '');
             this.setState({ optionSelected: false });
           }}
@@ -161,7 +160,7 @@ class DateInput extends React.Component {
               );
             }
 
-            const myOption = options.find(o => o.textValue === inputProps.value);
+            const myOption = options.find((o) => o.textValue === inputProps.value);
             return (
               <span className="form-control">
                 <span className="form-control-template-value">
@@ -202,7 +201,7 @@ DateInput.propTypes = {
   dateTimeFormat: PropTypes.string,
   showTimeSelect: PropTypes.bool,
   showDateSelect: PropTypes.bool,
-  getCalendarContainer: PropTypes.func
+  getCalendarContainer: PropTypes.func,
 };
 
 DateInput.defaultProps = {
@@ -224,7 +223,7 @@ DateInput.defaultProps = {
   dateTimeFormat: 'LLL',
   showTimeSelect: true,
   showDateSelect: true,
-  getCalendarContainer: null
+  getCalendarContainer: null,
 };
 
 export default DateInput;

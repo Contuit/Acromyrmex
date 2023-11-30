@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // From https://github.com/sstur/draft-js-utils/blob/master/packages/draft-js-export-markdown/src/stateToMarkdown.js
 // adapted to support mentions as well
 import { getEntityRanges, BLOCK_TYPE, ENTITY_TYPE, INLINE_STYLE } from 'draft-js-utils';
@@ -60,7 +61,6 @@ class MarkupGenerator {
   processBlock() {
     const block = this.blocks[this.currentBlock];
     const blockType = block.getType();
-    // console.log(JSON.stringify(block, null, 2));
     switch (blockType) {
       case BLOCK_TYPE.HEADER_ONE: {
         this.insertLineBreaks(1);
@@ -243,7 +243,7 @@ class MarkupGenerator {
           // mentions
           let returnVal = false;
 
-          this.mentionStateToMarkdownFunctions.forEach(func => {
+          this.mentionStateToMarkdownFunctions.forEach((func) => {
             const result = func(entity);
             if (result) {
               returnVal = result;

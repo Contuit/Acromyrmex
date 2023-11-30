@@ -5,7 +5,7 @@ import { FormControl } from '../../utility/UiComponents';
 
 import FormField from '../FormField';
 
-const TextAreaInput = props => {
+function TextAreaInput(props) {
   const {
     help,
     label,
@@ -14,7 +14,7 @@ const TextAreaInput = props => {
     disabled,
     vertical,
     input: { ...inputProps },
-    meta
+    meta,
   } = props;
 
   return (
@@ -29,7 +29,7 @@ const TextAreaInput = props => {
       <FormControl componentClass="textarea" disabled={disabled} {...inputProps} />
     </FormField>
   );
-};
+}
 
 TextAreaInput.shouldComponentUpdate = FormField.shouldFormFieldUpdate;
 
@@ -41,7 +41,7 @@ TextAreaInput.propTypes = {
   input: PropTypes.shape().isRequired,
   disabled: PropTypes.bool,
   noLabel: PropTypes.bool,
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
 };
 
 TextAreaInput.defaultProps = {
@@ -50,7 +50,7 @@ TextAreaInput.defaultProps = {
   prefix: null,
   noLabel: false,
   disabled: false,
-  vertical: false
+  vertical: false,
 };
 
-module.exports = TextAreaInput;
+export default TextAreaInput;
