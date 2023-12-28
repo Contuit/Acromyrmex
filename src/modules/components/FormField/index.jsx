@@ -111,9 +111,9 @@ class FormField extends React.Component {
 
     if (addonCustomBefore || addonCustomAfter) {
       input = (
-        <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
+        <InputGroup style={{ display: 'table' }}>
           {addonCustomBefore}
-          {input}
+          <div>{input}</div>
           {addonCustomAfter}
         </InputGroup>
       );
