@@ -3,14 +3,13 @@
 import _ from 'underscore';
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'react-select/dist/react-select.css';
-import './style.css';
-import Loading from '../Loading';
-import Select from '../TetheredSelectWrapper';
+import Select from 'react-select';
 import ConfirmModal from '../ConfirmModal';
-
+import Loading from '../Loading';
 import FormField from '../FormField';
 import Mention from '../MarkdownInput/Mention';
+
+import './style.css';
 
 class SelectInput extends React.Component {
   static templateValueRenderer(option) {
@@ -195,7 +194,7 @@ class SelectInput extends React.Component {
         name={input.name}
         title={myOptions.length === 0 ? 'no available options' : ''}
         disabled={myOptions.length === 0 || disabled}
-        value={value}
+        value={myOptions.filter((option) => option.value === value)}
         onBlur={() => input.onBlur(input.value)}
         options={myOptions}
         clearable={!multi && enableEmpty}

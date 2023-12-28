@@ -5,7 +5,6 @@ export { default as LoadingButton } from './LoadingButton';
 export { default as FormField } from './FormField';
 export { default as TextAreaInput } from './TextAreaInput';
 export { default as TextInput } from './TextInput';
-export { default as TetheredSelectWrapper } from './TetheredSelectWrapper';
 export { default as SelectInput } from './SelectInput';
 export { default as CheckboxInput } from './CheckboxInput';
 export { default as MarkdownInput } from './MarkdownInput';
