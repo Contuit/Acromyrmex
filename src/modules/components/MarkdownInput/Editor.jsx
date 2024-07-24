@@ -102,7 +102,7 @@ class OurEditor extends React.Component {
     } = this.props;
     const md = this.getStateToMarkdown(editorState);
 
-    onChange(md);
+    onChange(md.trim());
     this.setState({ editorState });
   }
 
